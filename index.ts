@@ -3,9 +3,12 @@ type CoffeeCup = {
     hasMilk:boolean;
 }
 
+//public - default
+//private - only in the class
+//protected - only in a child
 class CoffeeMaker{
-    static BEANS_GRAM_PER_SHOW= 7;
-    coffeeBeans:number = 0;
+    private static BEANS_GRAM_PER_SHOW= 7;
+    private coffeeBeans:number = 0;
 
     constructor(coffeeBeans:number){
         this.coffeeBeans = coffeeBeans;
@@ -23,8 +26,16 @@ class CoffeeMaker{
             hasMilk: false
         }
     }
+
+    fillCoffeeBeans(beans:number){
+        if(beans <0){
+            throw new Error('value for beans should be grather than 0');
+        }
+        this.coffeeBeans = beans;
+    }
     
 }
 
 const maker = new CoffeeMaker(32);
-console.log(maker)
+maker.fillCoffeeBeans(300);
+// maker.coffeeBeans = -3; //invalid
