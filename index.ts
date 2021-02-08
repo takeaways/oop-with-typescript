@@ -39,3 +39,25 @@ class CoffeeMaker{
 const maker = new CoffeeMaker(32);
 maker.fillCoffeeBeans(300);
 // maker.coffeeBeans = -3; //invalid
+
+class User{
+    get fullName():string{
+        return `${this.firstName} ${this.lastName}`
+    }
+    private internalAge = 4;
+    get age():number{
+        return this.internalAge
+    }
+    set age(num:number){
+        if(num < 0){
+            throw new Error("You were born")
+        }
+        this.internalAge = num;
+    }
+    constructor(private firstName:string, private lastName:string){}
+}
+
+const user = new User("gi",'j')
+user.age = 30;
+console.log(user.fullName)
+console.log(user)
