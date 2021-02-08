@@ -3,10 +3,10 @@ type CoffeeCup = {
     hasMilk:boolean;
 }
 
-//public - default
-//private - only in the class
-//protected - only in a child
-class CoffeeMaker{
+interface CoffeeMaker{
+    makeCoffee(shots:number):CoffeeCup
+}
+class CoffeeMachine implements CoffeeMaker{
     private static BEANS_GRAM_PER_SHOW= 7;
     private coffeeBeans:number = 0;
 
@@ -14,17 +14,30 @@ class CoffeeMaker{
         this.coffeeBeans = coffeeBeans;
     }
 
-    makeCoffee(shots: number):CoffeeCup{
-        if(this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAM_PER_SHOW){
+    private grindBeans(shots:number){
+        if(this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAM_PER_SHOW){
             throw new Error("Not Enough Coffee Beans");
         }
-    
-        this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAM_PER_SHOW;
-    
+        this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAM_PER_SHOW;
+        console.log(`grinding.... ${shots}shots`)
+    }
+
+    private preheat(){
+        console.log(`heating....`)
+    }
+
+    private extract(shots:number):CoffeeCup{
+        console.log(`pulling... ${shots}`)
         return {
             shots,
-            hasMilk: false
+            hasMilk:false
         }
+    }
+
+    makeCoffee(shots: number):CoffeeCup{
+        this.grindBeans(shots);
+        this.preheat();
+        return this.extract(shots)
     }
 
     fillCoffeeBeans(beans:number){
@@ -36,28 +49,13 @@ class CoffeeMaker{
     
 }
 
-const maker = new CoffeeMaker(32);
+const maker:CoffeeMachine = new CoffeeMachine(32);
 maker.fillCoffeeBeans(300);
-// maker.coffeeBeans = -3; //invalid
+const coffee = maker.makeCoffee(3);
+console.log(coffee)
 
-class User{
-    get fullName():string{
-        return `${this.firstName} ${this.lastName}`
-    }
-    private internalAge = 4;
-    get age():number{
-        return this.internalAge
-    }
-    set age(num:number){
-        if(num < 0){
-            throw new Error("You were born")
-        }
-        this.internalAge = num;
-    }
-    constructor(private firstName:string, private lastName:string){}
-}
+// const maker2:CoffeeMaker = new CoffeeMachine(32);
+// maker2.fillCoffeeBeans(300);
+// const coffee2 = maker2.makeCoffee(3);
+// console.log(coffee2)
 
-const user = new User("gi",'j')
-user.age = 30;
-console.log(user.fullName)
-console.log(user)
