@@ -8,3 +8,7 @@ Learn OOP with Typescript
     - interface
 3. Inheritance:
 4. Polymorphism
+
+# deploy
+
+firebase

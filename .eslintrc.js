@@ -29,6 +29,6 @@ module.exports = {
         "key-spacing": [ "error", { "mode": "strict" } ],
         "space-before-function-paren": [ "error", { "anonymous": "always", "named": "never", "asyncArrow": "always" } ],
         "eqeqeq": [ "error", "always" ],
-        "space-infix-ops": "error"
+        "space-infix-ops": "error",
     }
 }
