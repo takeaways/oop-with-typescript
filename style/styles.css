@@ -256,7 +256,7 @@ body {
 }
 
 .lifted {
-  animation: drag_start 250ms;
+  animation: drag_start .5s;
   opacity: 0.2;
 }
 
@@ -271,4 +271,9 @@ body {
 
 .drop-area {
   border: 2px solid var(--accent-color);
+}
+
+/* ---- Drag and Drop ---- */
+.mute-children *{
+  pointer-events: none;
 }

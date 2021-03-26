@@ -16,4 +16,7 @@ export default class BaseComponent {
         parent.removeChild(this.element);
     }
     ;
+    attach(component, position) {
+        component.attachTo(this.element, position);
+    }
 }
