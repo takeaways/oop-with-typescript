@@ -1,6 +1,7 @@
 export interface Component{
   attachTo(parent:HTMLElement, position?:InsertPosition):void;
   removeFrom(parent:HTMLElement):void;
+  attach(component:Component, position?: InsertPosition):void;
 }
 
 export default class BaseComponent<T extends HTMLElement> implements Component{
@@ -21,4 +22,8 @@ export default class BaseComponent<T extends HTMLElement> implements Component{
     }
     parent.removeChild(this.element);
   };
+
+  attach(component:Component, position?: InsertPosition ){
+    component.attachTo(this.element, position);
+  }
 }
